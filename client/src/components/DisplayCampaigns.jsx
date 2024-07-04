@@ -4,31 +4,6 @@ import { loader } from '../assets';
 import FundCard from './FundCard';
 import { daysLeft } from '../utils';
 
-const quickSort = (array, left = 0, right = array.length - 1) => {
-  if (left >= right) return array;
-
-  const pivotIndex = partition(array, left, right);
-  quickSort(array, left, pivotIndex - 1);
-  quickSort(array, pivotIndex + 1, right);
-
-  return array;
-};
-
-const partition = (array, left, right) => {
-  const pivot = array[right];
-  let i = left - 1;
-
-  for (let j = left; j < right; j++) {
-    if (array[j].remainingDays < pivot.remainingDays) {
-      i++;
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-  }
-
-  [array[i + 1], array[right]] = [array[right], array[i + 1]];
-  return i + 1;
-};
-
 const DisplayCampaigns = ({ title, isLoading, campaigns }) => {
   const navigate = useNavigate();
 
@@ -37,7 +12,7 @@ const DisplayCampaigns = ({ title, isLoading, campaigns }) => {
     remainingDays: daysLeft(campaign.deadline)
   }));
 
-  const sortedCampaigns = quickSort(campaignsWithDaysLeft);
+  const sortedCampaigns = campaignsWithDaysLeft.sort((a, b) => a.remainingDays - b.remainingDays);
 
   const handleNavigate = (campaign) => {
     navigate(`/campaign-details/${campaign.title}`, { state: campaign });
