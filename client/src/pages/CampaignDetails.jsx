@@ -166,12 +166,6 @@ const CampaignDetails = () => {
                 styles="w-full mt-4 border border-red-500 hover:bg-red-500 hover:text-white text-red-500"
                 handleClick={handleDelete}
               />
-              <CustomButton
-                btnType="button"
-                title="Go to Analytics"
-                styles="w-full mt-4 border border-green-400 hover:bg-green-400 text-green-400 hover:text-white"
-                handleClick={() => navigate("/campaign-details/Analytics")}
-              />
             </>
           ) : (
             <>

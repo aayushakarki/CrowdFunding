@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { favicon, sun } from "../assets";
+import { favicon } from "../assets";
 import { navlinks } from "../constants";
 import { useDisconnect } from "@thirdweb-dev/react";
 
@@ -67,7 +67,6 @@ const Sidebar = () => {
             />
           ))}
         </div>
-        {/* <Icon styles="bg-[#000000]" imgUrl={sun} /> */}
       </div>
     </div>
   );

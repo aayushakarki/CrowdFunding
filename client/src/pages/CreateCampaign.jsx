@@ -31,7 +31,9 @@ const CreateCampaign = () => {
     checkIfImage(form.image, async (exists) => {
       if(exists) {
         setIsLoading(true)
-        await createCampaign({ ...form, target: ethers.utils.parseUnits(form.target, 18)})
+        await createCampaign({ ...form, target: ethers.utils.parseUnits(form.target, 18),
+          category: form.category  // Ensure the category is passed
+        })
         setIsLoading(false);
         navigate('/');
       } else {
@@ -91,7 +93,21 @@ const CreateCampaign = () => {
         value={form.deadline}
         handleChange={(e) => handleFormFieldChange('deadline', e)}
       />
-
+            <FormField
+        labelName="Campaign Category *"
+        placeholder="Select a category"
+        inputType="select"
+        handleChange={(e) => handleFormFieldChange('category', e)}
+        options={[
+          { value: '', label: 'Select a category' },
+          { value: 'health', label: 'Health Aid' },
+          { value: 'education', label: 'Education Fund' },
+          { value: 'humanitarian', label: 'Humanitarian Aid' },
+          { value: 'technology', label: 'Technology and Innovation' },
+          { value: 'emergency', label: 'Emergency & Disaster Relief' },
+        ]}
+        value={form.category}
+      />
       </div>
       <FormField 
             labelName="Campaign image *"

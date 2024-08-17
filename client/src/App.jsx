@@ -17,7 +17,7 @@ const App = () => {
           <Route path="/create-campaign" element={<CreateCampaign />} />
           {/* dynamic route */}
           <Route path="/campaign-details/:id" element={<CampaignDetails />} />
-          <Route path="/campaign-details/Analytics" element={<Analytics />} />
+          <Route path="/Analytics" element={<Analytics />} />
         </Routes>
       </div>
     </div>
