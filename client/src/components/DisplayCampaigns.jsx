@@ -9,7 +9,8 @@ const DisplayCampaigns = ({ title, isLoading, campaigns }) => {
 
   const campaignsWithDaysLeft = campaigns.map(campaign => ({
     ...campaign,
-    remainingDays: daysLeft(campaign.deadline)
+    remainingDays: daysLeft(campaign.deadline),
+    category: campaign.category || 'Education'
   }));
 
   const sortedCampaigns = campaignsWithDaysLeft.sort((a, b) => a.remainingDays - b.remainingDays);

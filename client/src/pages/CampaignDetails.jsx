@@ -10,8 +10,7 @@ import { user } from "../assets";
 const CampaignDetails = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
-  const { donate, getDonations, contract, address, deleteCampaign } =
-    useStateContext();
+  const { donate, getDonations, contract, address, deleteCampaign } = useStateContext();
 
   const [isLoading, setIsLoading] = useState(false);
   const [amount, setAmount] = useState("");
@@ -21,7 +20,6 @@ const CampaignDetails = () => {
 
   const fetchDonators = async () => {
     const data = await getDonations(state.pId);
-
     setDonators(data);
   };
 
@@ -31,18 +29,14 @@ const CampaignDetails = () => {
 
   const handleDonate = async () => {
     setIsLoading(true);
-
     await donate(state.pId, amount);
-
     navigate("/");
     setIsLoading(false);
   };
 
   const handleDelete = async () => {
     setIsLoading(true);
-
     await deleteCampaign(state.pId);
-
     navigate("/");
     setIsLoading(false);
   };
@@ -92,6 +86,13 @@ const CampaignDetails = () => {
 
       <div className="mt-[60px] flex lg:flex-row flex-col gap-5">
         <div className="flex-[2] flex flex-col gap-[40px]">
+          {/* Campaign Category */}
+            <div>
+              <p className="font-epilogue font-semibold text-[18px] text-[#808191] uppercase">
+                {state.category}
+              </p>
+            </div>
+
           <div>
             <h4 className="font-epilogue font-semibold text-[18px] text-white uppercase">
               Creator

@@ -16,7 +16,8 @@ const CreateCampaign = () => {
     description: '',
     target: '', 
     deadline: '',
-    image: ''
+    category: '',
+    image: '',
   });
 
   const handleFormFieldChange = (fieldName, e) => {
@@ -44,7 +45,18 @@ const CreateCampaign = () => {
     console.log(form);
 
   }
+  
   return (
+    <>
+    {/* Back to Dashboard Button */}
+    <button
+        onClick={() => navigate("/")}
+        className="flex items-center text-white mt-5 mb-5 text-[18px] text-[#A5A6AB]" // Use Tailwind classes for size and color
+      >
+        &#8592; {/* Unicode character for left arrow */}
+        <span className="ml-2">Back to Dashboard</span>
+      </button>
+      
     <div className="bg-[#000000] flex justify-center items-center flex-col rounded-[10px] sm:p-10 p-4 bg-[#000000]">
     {isLoading && <Loader/>}
     <div className="flex justify-center items-center p-[16px] sm:min-w-[380px] bg-[#1dc071] rounded-[10px]">
@@ -93,21 +105,23 @@ const CreateCampaign = () => {
         value={form.deadline}
         handleChange={(e) => handleFormFieldChange('deadline', e)}
       />
-            <FormField
+
+      <FormField
         labelName="Campaign Category *"
         placeholder="Select a category"
         inputType="select"
         handleChange={(e) => handleFormFieldChange('category', e)}
         options={[
           { value: '', label: 'Select a category' },
-          { value: 'health', label: 'Health Aid' },
-          { value: 'education', label: 'Education Fund' },
-          { value: 'humanitarian', label: 'Humanitarian Aid' },
+          { value: 'health', label: 'Health' },
+          { value: 'education', label: 'Education' },
+          { value: 'humanitarian', label: 'Humanitarian' },
           { value: 'technology', label: 'Technology and Innovation' },
           { value: 'emergency', label: 'Emergency & Disaster Relief' },
         ]}
         value={form.category}
       />
+
       </div>
       <FormField 
             labelName="Campaign image *"
@@ -126,6 +140,7 @@ const CreateCampaign = () => {
     </form>
 
     </div>
+    </>
   )
 }
 

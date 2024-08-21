@@ -11,7 +11,9 @@ const StateContext = createContext();
 
 export const StateContextProvider = ({ children }) => {
   const { contract } = useContract(
-    "0x4e4e72E5Ce3B8B5ed46Ba9d638BF6b79585abfdf"
+    "0xfDBd25E3DE1676Cc17f9Fe07e98c60A694914299"
+    // "0x1E2dab0F248471A8668d5354895cC23795D59509"
+    // "0x4e4e72E5Ce3B8B5ed46Ba9d638BF6b79585abfdf"
     // Replace with your contract address
   );
   const { mutateAsync: createCampaign } = useContractWrite(
@@ -37,6 +39,7 @@ export const StateContextProvider = ({ children }) => {
           form.description, // description
           form.target,
           deadlineInSeconds,
+          form.category,
           form.image,
         ],
       });
@@ -59,6 +62,7 @@ export const StateContextProvider = ({ children }) => {
       amountCollected: ethers.utils.formatEther(
         campaign.amountCollected.toString()
       ),
+      category: campaign.category,
       image: campaign.image,
       pId: i,
     }));
