@@ -24,7 +24,7 @@ const Transactions = () => {
     <div>
       <button
         onClick={() => navigate(-1)}
-        className="flex items-center text-white mt-5 mb-5 text-[18px] text-[#A5A6AB]" // Use Tailwind classes for size and color
+        className="flex items-center mt-5 mb-5 text-[18px] text-[#808191] hover:text-[#C6C7D0]" // Use Tailwind classes for size and color
       >
         &#8592; {/* Unicode character for left arrow */}
         <span className="ml-2">Go Back</span>

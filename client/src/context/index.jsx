@@ -11,10 +11,8 @@ const StateContext = createContext();
 
 export const StateContextProvider = ({ children }) => {
   const { contract } = useContract(
-    "0xfDBd25E3DE1676Cc17f9Fe07e98c60A694914299"
-    // "0x1E2dab0F248471A8668d5354895cC23795D59509"
-    // "0x4e4e72E5Ce3B8B5ed46Ba9d638BF6b79585abfdf"
-    // Replace with your contract address
+    "0x2a4c36acC154b38A555Ce23F5A8A05660c914B5f"
+    // "0xfDBd25E3DE1676Cc17f9Fe07e98c60A694914299"
   );
   const { mutateAsync: createCampaign } = useContractWrite(
     contract,
@@ -27,11 +25,13 @@ export const StateContextProvider = ({ children }) => {
 
   const address = useAddress();
   const connect = useMetamask();
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
 
   const publishCampaign = async (form) => {
     try {
-      const deadlineInSeconds = Math.floor(new Date(form.deadline).getTime() / 1000);
+      const deadlineInSeconds = Math.floor(
+        new Date(form.deadline).getTime() / 1000
+      );
       const data = await createCampaign({
         args: [
           address, // owner
@@ -67,7 +67,9 @@ export const StateContextProvider = ({ children }) => {
       pId: i,
     }));
 
-    const activeCampaigns = parsedCampaigns.filter(campaign => campaign.deadline >= currentTime);
+    const activeCampaigns = parsedCampaigns.filter(
+      (campaign) => campaign.deadline >= currentTime
+    );
     return activeCampaigns;
   };
 

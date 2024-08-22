@@ -10,7 +10,8 @@ import { user } from "../assets";
 const CampaignDetails = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
-  const { donate, getDonations, contract, address, deleteCampaign } = useStateContext();
+  const { donate, getDonations, contract, address, deleteCampaign } =
+    useStateContext();
 
   const [isLoading, setIsLoading] = useState(false);
   const [amount, setAmount] = useState("");
@@ -50,13 +51,21 @@ const CampaignDetails = () => {
       {/* Back Arrow Button */}
       <button
         onClick={() => navigate("/")}
-        className="flex items-center text-white mt-5 mb-5 text-[18px] text-[#A5A6AB]" // Use Tailwind classes for size and color
+        className="flex items-center mt-5 mb-5 text-[18px] text-[#808191] hover:text-[#C6C7D0]" // Use Tailwind classes for size and color
       >
         &#8592; {/* Unicode character for left arrow */}
         <span className="ml-2">Back to Dashboard</span>
       </button>
 
-      <div className="w-full flex md:flex-row flex-col mt-10 gap-[30px]">
+      <h1 className="font-epilogue font-semibold text-[22px] text-white uppercase">
+        {state.title}
+      </h1>
+      <div>
+        <p className="font-epilogue font-semibold text-[16px] text-[#808191] uppercase">
+          {state.category}
+        </p>
+      </div>
+      <div className="w-full flex md:flex-row flex-col mt-5 gap-[30px]">
         <div className="flex-1 flex-col">
           <img
             src={state.image}
@@ -84,15 +93,8 @@ const CampaignDetails = () => {
         </div>
       </div>
 
-      <div className="mt-[60px] flex lg:flex-row flex-col gap-5">
+      <div className="mt-[40px] flex lg:flex-row flex-col gap-5">
         <div className="flex-[2] flex flex-col gap-[40px]">
-          {/* Campaign Category */}
-            <div>
-              <p className="font-epilogue font-semibold text-[18px] text-[#808191] uppercase">
-                {state.category}
-              </p>
-            </div>
-
           <div>
             <h4 className="font-epilogue font-semibold text-[18px] text-white uppercase">
               Creator
@@ -183,7 +185,9 @@ const CampaignDetails = () => {
                     value={amount}
                     onChange={(e) => setAmount(e.target.value)}
                   />
-
+                  <h4 className="font-epilogue font-semibold text-[18px] leading-[22px] text-[#808191] mt-5 ml-2">
+                    Goal: {state.target}
+                  </h4>
                   <div className="my-[20px] p-4 bg-[#13131a] rounded-[10px]">
                     <h4 className="font-epilogue font-semibold text-[14px] leading-[22px] text-white">
                       Back it because you believe in it.
