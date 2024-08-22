@@ -18,10 +18,14 @@ contract CrowdFunding {
     mapping(uint256 => Campaign) public campaigns;
 
     uint256 public numberOfCampaigns = 0;
-    address public owner; // Add an owner variable
+    address public owner;
+
+    event CampaignCreated(uint256 id, address owner, string title, uint256 target, uint256 deadline, string category);
+    event DonationReceived(uint256 campaignId, address donor, uint256 amount);
+    event CampaignDeleted(uint256 id);
 
     constructor() {
-        owner = msg.sender; // Set the contract creator as the owner
+        owner = msg.sender;
     }
 
     function createCampaign(address _owner, string memory _title, string memory _description, 
@@ -38,6 +42,8 @@ contract CrowdFunding {
         campaign.amountCollected = 0;
         campaign.category = _category;
         campaign.image = _image;
+
+        emit CampaignCreated(numberOfCampaigns, _owner, _title, _target, _deadline, _category);
 
         numberOfCampaigns++;
 
@@ -57,22 +63,8 @@ contract CrowdFunding {
         require(sent, "Failed to send Ether");
 
         campaign.amountCollected += msg.value;
-    }
 
-    function getDonators(uint256 _id) public view returns (address[] memory, uint256[] memory) {
-        require(_id < numberOfCampaigns, "Campaign ID does not exist.");
-
-        Campaign storage campaign = campaigns[_id];
-        return (campaign.donators, campaign.donations);
-    }
-
-    function getCampaigns() public view returns (Campaign[] memory) {
-        Campaign[] memory allCampaigns = new Campaign[](numberOfCampaigns);
-        for (uint256 i = 0; i < numberOfCampaigns; i++) {
-            allCampaigns[i] = campaigns[i];
-        }
-
-        return allCampaigns;
+        emit DonationReceived(_id, msg.sender, msg.value);
     }
 
     function deleteCampaign(uint256 _id) public {
@@ -88,9 +80,19 @@ contract CrowdFunding {
 
         delete campaigns[numberOfCampaigns - 1];
         numberOfCampaigns--;
+
+        emit CampaignDeleted(_id);
     }
 
     function getOwner() public view returns (address) {
-        return owner; // Function to return the contract owner address
+        return owner;
+    }
+
+    function getCampaigns() public view returns (Campaign[] memory) {
+        Campaign[] memory allCampaigns = new Campaign[](numberOfCampaigns);
+        for (uint256 i = 0; i < numberOfCampaigns; i++) {
+            allCampaigns[i] = campaigns[i];
+        }
+        return allCampaigns;
     }
 }

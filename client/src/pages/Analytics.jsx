@@ -4,9 +4,11 @@ import { useNavigate } from "react-router-dom";
 
 const Transactions = () => {
   const [transactions, setTransactions] = useState([]);
-  const address = "0xfDBd25E3DE1676Cc17f9Fe07e98c60A694914299";
+  const address = "0x2B1F4fF5875535DbCaAC6F487f542CcCbe75FfF4";
   const apiKey = "CHKAU7C8CFEG37FEZTHPXCZ7FZUKQ8G7B2";
+
   const url = `https://api-sepolia.etherscan.io/api?module=account&action=txlist&address=${address}&startblock=0&endblock=99999999&sort=asc&apikey=${apiKey}`;
+
   const navigate = useNavigate();
 
   useEffect(() => {
